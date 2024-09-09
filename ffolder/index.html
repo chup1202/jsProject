@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*Стилизація проєкта -*/
+        /*  index.html - всі блоки з user - по 2 в рядок. кнопки/аосилвння розташувати під інформацією про user.*/
+        /*     user-details.html - блок з інфою про user зверху сторінки. Кнопка нижчє, на 90% ширини сторінки, по центру.*/
+        /*        блоки з короткою іфною про post - в ряд по 5 .*/
+        /*           post-details.html - блок з інфою про пост зверху. Коментарі - по 4 в ряд.*/
+        /*              Всі елементи котрі характеризують users, posts, comments візуалізувати, так, щоб було видно що це блоки (дати фон. марджини і тд)*/
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+            background-color: #aeaae7;
+            text-decoration: none;
+        }
+
+
+
+        #UserConteiner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        body>h1{
+            display: flex;
+            justify-content: center;
+        }
+        #UserConteiner>div>p{
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+
+
+        #UserConteiner div {
+            width: 40%;
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            padding: 15px;
+
+        }
+
+
+
+        #UserConteiner a {
+            display: block;
+            margin-top: 13px;
+            text-align: center;
+            background-color: #e7bc4b;
+            color: crimson;
+            padding: 18px;
+            text-decoration: none;
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<h1>Users List</h1>
+<div id="UserConteiner"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body>h2{
+            display: flex;
+            justify-content: center;
+            font-size: 40px;
+
+        }
+        #user-details>div>p{
+            font-size: 20px;
+        }
+
+        #user-details {
+
+            background-color: white;
+
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+        #postCon {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+
+        #PostLoad {
+            width: 90%;
+            margin: 20px auto;
+            display: block;
+            background-color: #e7cc4c;
+            color: crimson;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+
+        }
+
+        #postCon a {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            background-color: crimson;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        #postCon div {
+            width: 18%;
+            background-color: white;
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<h2>Details</h2>
+<div id="user-details"></div>
+
+<button id="PostLoad">Posts of  user</button>
+<div id="postCon"></div>
+
+<script>
+    const url1 = new URLSearchParams(window.location.search);
+    const userId = url1.get('userId');
+
+    function displayUserDetails(user) {
+        const userDetailsContainer = document.getElementById('user-details');
+
+        const userInfo = document.createElement('div');
+        userInfo.innerHTML = `
+                <p>Name: ${user.name}</p>
+                <p>Username: ${user.username}</p>
+                <p>ID: ${user.id}</p>
+                <p>Address: ${user.address.street}, ${user.address.suite}, ${user.address.city}, ${user.address.zipcode}</p>
+                <p>Email: ${user.email}</p>
+                <p>Company: ${user.company.name} - ${user.company.catchPhrase}, ${user.company.bs}</p>
+                <p>Website: ${user.website}</p>
+                <p>Phone: ${user.phone}</p>
+                <p>Geo: Lat: ${user.address.geo.lat}, Lng: ${user.address.geo.lng}</p>
+            `;
+        userDetailsContainer.appendChild(userInfo);
+    }
+
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        .then(res => res.json())
+        .then(user => displayUserDetails(user))
+
+
+    function displayUserPosts(posts) {
+        const postsContainer = document.getElementById('postCon');
+        postsContainer.innerHTML = '';
+
+        posts.forEach(post => {
+            const postBlock = document.createElement('div');
+            const postTitle = document.createElement('p');
+            const postDetailsButton = document.createElement('a');
+
+
+
+            postTitle.textContent = `Title: ${post.title}`;
+            postBlock.appendChild(postTitle);
+
+            postDetailsButton.textContent = ' Post Details';
+            postDetailsButton.href = `post-details.html?postId=${post.id}`;
+            postBlock.appendChild(postDetailsButton);
+
+            postsContainer.appendChild(postBlock);
+        });
+    }
+
+    document.getElementById('PostLoad').addEventListener('click', () => {
+        fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+            .then(res => res.json())
+            .then(posts => displayUserPosts(posts))
+
+    });
+</script>
+
+</body>
+</html>
